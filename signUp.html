@@ -7,7 +7,44 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="email" placeholder="Email">
-    <input type="password" placeholder="Password">
+    <div>
+        <form>
+            <input id="name" type="text" placeholder="Name">
+            <input id="email" type="email" placeholder="Email">
+            <input id="pass" type="password" placeholder="Password">
+            <button>Sign Up</button>
+        </form>
+    </div>
 </body>
 </html>
+<script>
+    let form = document.querySelector('form');
+    let userData=JSON.parse(localStorage.getItem("userData")) || [];
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        let data = {
+            name:form.name.value,
+            email:form.email.value,
+            pass:form.pass.value,
+        }
+        if(checkEmails(data.email)==true){
+            userData.push(data);
+            localStorage.setItem("userData",JSON.stringify(userData));
+        }
+        else{
+            alert("Account Already Exists");
+        }
+    })
+
+    function checkEmails(email){
+        let filter = userData.filter(function (element){
+            return email === element.email;
+        })
+        if(filter.length > 0){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
+</script>
