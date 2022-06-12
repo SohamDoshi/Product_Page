@@ -455,3 +455,26 @@ var womensData = [
       strikedoffprice: 1899,
     },
   ];
+
+  let ProductCont = document.getElementById('products');
+
+  function displayProducts(data){
+    data.forEach(function (element){
+      let Product = document.createElement("div");  
+      let img = document.createElement('img');
+      img.src = element.image_url;
+      let name = document.createElement('h2');
+      name.innerText = element.name;
+      let price = document.createElement('p');
+      price.innerText = element.price;
+      let strikedoffprice = document.createElement('p')
+      strikedoffprice.innerText = element.strikedoffprice;
+      let buttonCart = document.createElement('button');
+      buttonCart.innerText = 'Add to Cart';
+
+      Product.append(img,name,price,buttonCart)
+      ProductCont.append(Product)
+    });
+  }
+
+  displayProducts(womensData);
